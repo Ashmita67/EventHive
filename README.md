@@ -21,11 +21,12 @@ EventHive is a full-stack web application designed to streamline college event m
 EventHive follows a **client-server architecture**:
 
 * **Frontend (React.js)** → UI, state management, API calls
-* **Backend (Node.js + Express)** → Business logic, APIs
+* **Backend (Node.js + Express)** → Business logic, REST APIs
 * **Database (MongoDB)** → Stores users, events, registrations, certificates
 
-Flow:
-User → React App → REST API → Express Server → MongoDB → Response → UI
+### 🔄 Flow
+
+User → React App → Axios → Express API → MongoDB → Response → UI
 
 ---
 
@@ -35,6 +36,7 @@ User → React App → REST API → Express Server → MongoDB → Response → 
 
 * React.js (Hooks, Context API)
 * Axios
+* React Router
 
 **Backend**
 
@@ -48,8 +50,9 @@ User → React App → REST API → Express Server → MongoDB → Response → 
 
 **Other**
 
-* QR Code generation
-* PDF generation
+* QR Code generation (`qrcode`)
+* PDF generation (`pdfkit`)
+* UUID (`uuid`)
 * REST APIs
 
 ---
@@ -58,8 +61,9 @@ User → React App → REST API → Express Server → MongoDB → Response → 
 
 ```
 eventhive/
-├── client/     # React frontend
+├── client/     # React frontend (Vite)
 ├── server/     # Express backend
+├── README.md
 ```
 
 ---
@@ -67,10 +71,10 @@ eventhive/
 ## ⚙️ How It Works
 
 1. Admin/Faculty creates and publishes events
-2. Students browse and register
+2. Students browse and register for events
 3. Unique QR code is generated per registration
-4. QR is scanned to mark attendance
-5. Certificates are generated for verified attendees
+4. QR is scanned during event to mark attendance
+5. Certificates are generated for verified participants
 
 ---
 
@@ -82,48 +86,73 @@ eventhive/
 * Implemented QR-based attendance system
 * Developed certificate generation logic (PDF)
 * Added authentication & role-based access control
-* Wrote unit tests for backend APIs
+* Integrated frontend with backend APIs
 
 ---
 
-## 📦 Installation & Setup
+# 📦 Installation & Setup (STEP-BY-STEP)
 
-### 1. Clone the repository
+## 🔹 Prerequisites
+
+Make sure you have installed:
+
+* Node.js (v18+ recommended)
+* MongoDB (local OR MongoDB Atlas)
+
+---
+
+## 🔹 1. Clone Repository
 
 ```bash
 git clone https://github.com/yourusername/EventHive.git
 cd EventHive
 ```
 
-### 2. Setup Backend
+---
+
+## 🔹 2. Setup Backend
 
 ```bash
 cd server
 npm install
+```
+
+### Create `.env` file in `/server`
+
+```env
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/eventhive
+JWT_SECRET=your_secret_key
+```
+
+👉 If using MongoDB Atlas, replace `MONGO_URI` with your cluster URL.
+
+---
+
+### ▶️ Run Backend
+
+```bash
 npm run dev
 ```
 
-### 3. Setup Frontend
+Server runs on:
 
-```bash
-cd client
-npm install
-npm run dev
+```
+http://localhost:5000
 ```
 
 ---
 
-## 🔐 Environment Variables
+## 🔹 3. Setup Frontend
 
-Create `.env` file in `/server`:
+Open new terminal:
 
-```env
-PORT=5000
-MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_secret_key
+```bash
+cd client
+npm install
 ```
 
-Create `.env` in `/client`:
+### Create `.env` file in `/client`
 
 ```env
 VITE_API_BASE_URL=http://localhost:5000/api
@@ -131,15 +160,84 @@ VITE_API_BASE_URL=http://localhost:5000/api
 
 ---
 
-## 🚀 Future Improvements
+### ▶️ Run Frontend
 
-* 💳 Payment integration (Razorpay)
-* 📱 Improved UI/UX
-* 📊 Advanced analytics dashboard
-* 🔔 Real-time notifications (WebSockets)
+```bash
+npm run dev
+```
+
+Frontend runs on:
+
+```
+http://localhost:5173
+```
 
 ---
 
-## 📌 License
+# 🧪 How to Use the App
+
+1. Register a new user
+2. Login
+3. View events
+4. Register for an event
+5. View QR code in “My Registrations”
+6. (Admin/Faculty) Scan QR → mark attendance
+7. Generate certificate
+
+---
+
+# ⚠️ Troubleshooting
+
+### ❌ MongoDB not connecting
+
+* Ensure MongoDB is running locally OR correct Atlas URL
+
+### ❌ JWT errors
+
+* Check `JWT_SECRET` in `.env`
+
+### ❌ CORS issues
+
+* Make sure backend is running before frontend
+
+### ❌ API not working
+
+* Verify:
+
+  * Backend → port 5000
+  * Frontend → correct API URL
+
+---
+
+# 🚀 Deployment
+
+### Backend → Render
+
+* Root: `/server`
+* Build: `npm install`
+* Start: `npm start`
+
+### Frontend → Vercel
+
+* Root: `/client`
+* Add env:
+
+```
+VITE_API_BASE_URL=https://your-backend-url/api
+```
+
+---
+
+# 🚀 Future Improvements
+
+* 💳 Payment integration (Razorpay)
+* 📱 Improved UI/UX
+* 📊 Admin analytics dashboard
+* 🔔 Real-time notifications (WebSockets)
+* 📷 Camera-based QR scanner
+
+---
+
+# 📌 License
 
 This project is for educational purposes.
