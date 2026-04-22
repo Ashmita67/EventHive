@@ -3,7 +3,19 @@
 EventHive is a full-stack web application designed to streamline college event management by centralizing event creation, registration, attendance tracking, and certificate generation.
 
 ---
+## ⚡ Quick Start
 
+```bash
+git clone https://github.com/Ashmita67/EventHive
+cd EventHive
+
+# Backend
+cd server && npm install && npm run dev
+
+# Frontend (new terminal)
+cd client && npm install && npm run dev
+```
+---
 ## ✨ Key Features
 
 * 🔐 Role-based authentication (Admin, Faculty, Student)
