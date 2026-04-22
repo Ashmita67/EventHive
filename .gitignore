@@ -1,0 +1,32 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build folders
+dist/
+build/
+
+# Vite cache
+.vite/
+
+# Certificates (generated PDFs)
+server/certificates/
+
+# Coverage
+coverage/
+
+# Misc
+*.tmp
+*.swp
