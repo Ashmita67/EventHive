@@ -1,4 +1,4 @@
-# 🚀 EventHive – Smart Event Management System
+# 🚀 EventHive – Event Management System
 
 EventHive is a full-stack web application designed to streamline college event management by centralizing event creation, registration, attendance tracking, and certificate generation.
 
